@@ -1,0 +1,164 @@
+// MyMachinePass.cpp - Machine pass with proper integration
+
+#include "llvm/CodeGen/MachineFunctionPass.h"
+#include "llvm/CodeGen/MachineFunction.h"
+#include "llvm/CodeGen/TargetPassConfig.h"
+#include "llvm/CodeGen/Passes.h"
+#include "llvm/PassRegistry.h"
+#include "llvm/PassInfo.h"
+#include "llvm/Support/raw_ostream.h"
+
+using namespace llvm;
+
+namespace {
+class MyMachinePass : public MachineFunctionPass {
+public:
+  static char ID;
+  
+  MyMachinePass() : MachineFunctionPass(ID) {}
+
+  bool runOnMachineFunction(MachineFunction &MF) override {
+    errs() << "========================================\n";
+    errs() << "[MyMachinePass] Processing: " << MF.getName() << "\n";
+    errs() << "========================================\n";
+    
+    for (MachineBasicBlock &MBB : MF) {
+      errs() << "  MBB " << MBB.getNumber() << ":\n";
+      for (MachineInstr &MI : MBB) {
+        errs() << "    ";
+        MI.print(errs());
+      }
+    }
+    
+    errs() << "========================================\n";
+    return false;
+  }
+
+  StringRef getPassName() const override { 
+    return "My Machine Function Pass"; 
+  }
+  
+  void getAnalysisUsage(AnalysisUsage &AU) const override {
+    MachineFunctionPass::getAnalysisUsage(AU);
+    // Preserve all analyses if you don't modify anything
+    AU.setPreservesAll();
+  }
+};
+} // end anonymous namespace
+
+char MyMachinePass::ID = 0;
+
+// Register the pass
+namespace llvm {
+  void initializeMyMachinePassPass(PassRegistry &Registry) {
+    PassInfo *PI = new PassInfo(
+        "My Machine Function Pass",
+        "my-machine-pass",
+        &MyMachinePass::ID,
+        PassInfo::NormalCtor_t(+[]() -> Pass* { 
+          return new MyMachinePass(); 
+        }),
+        false,
+        false
+    );
+    Registry.registerPass(*PI, false);
+  }
+}
+
+// Auto-register
+static struct StaticInit {
+  StaticInit() {
+    errs() << "*** Loading MyMachinePass ***\n";
+    initializeMyMachinePassPass(*PassRegistry::getPassRegistry());
+  }
+} InitializePass;
+
+// Factory function
+MachineFunctionPass *createMyMachinePass() {
+  return new MyMachinePass();
+}
+
+// =============================================================================
+// IMPORTANT: To properly integrate into the target pipeline, you need to
+// modify the target's TargetPassConfig implementation. This is typically done
+// in the target-specific code (e.g., MSP430TargetMachine.cpp)
+// =============================================================================
+
+/*
+Example integration in your target (e.g., MSP430PassConfig):
+
+class MSP430PassConfig : public TargetPassConfig {
+public:
+  MSP430PassConfig(MSP430TargetMachine &TM, PassManagerBase &PM)
+      : TargetPassConfig(TM, PM) {}
+
+  // Override one of these hooks to inject your pass:
+  
+  // 1. After instruction selection, before scheduling
+  void addPreSched2() override {
+    addPass(createMyMachinePass());
+  }
+  
+  // 2. After scheduling, before register allocation
+  void addPreRegAlloc() override {
+    addPass(createMyMachinePass());
+  }
+  
+  // 3. After register allocation, before prologue/epilogue insertion
+  void addPostRegAlloc() override {
+    addPass(createMyMachinePass());
+  }
+  
+  // 4. After prologue/epilogue, before final optimizations
+  void addPreEmitPass() override {
+    addPass(createMyMachinePass());
+  }
+  
+  // 5. Very late, just before assembly emission
+  void addPreEmitPass2() override {
+    addPass(createMyMachinePass());
+  }
+};
+
+Then in your target machine:
+
+TargetPassConfig *MSP430TargetMachine::createPassConfig(PassManagerBase &PM) {
+  return new MSP430PassConfig(*this, PM);
+}
+*/
+
+// =============================================================================
+// Available TargetPassConfig hooks (from highest to lowest level):
+// =============================================================================
+/*
+1. addIRPasses()           - Add IR-level passes before ISel
+2. addCodeGenPrepare()     - Before instruction selection
+3. addISelPrepare()        - Immediately before ISel
+4. addInstSelector()       - Instruction selection (override carefully!)
+5. addPreLegalizeMachineIR() - Before legalizing machine IR
+6. addLegalizeMachineIR()  - Legalization pass
+7. addPreRegBankSelect()   - Before register bank selection
+8. addRegBankSelect()      - Register bank selection
+9. addPreGlobalInstructionSelect() - Before global instruction selection
+10. addGlobalInstructionSelect()   - Global instruction selection
+11. addMachinePasses()     - Main machine pass pipeline (don't override!)
+12. addPreSched2()         - After ISel, before scheduling
+13. addPreRegAlloc()       - Before register allocation
+14. addPostRegAlloc()      - After register allocation
+15. addPreRewrite()        - Before virtual register rewriting
+16. addPostRewrite()       - After virtual register rewriting
+17. addPreEmitPass()       - Before emission (common insertion point)
+18. addPreEmitPass2()      - Very late, before assembly printing
+
+Most common insertion points:
+- addPreRegAlloc()  - For analysis before register allocation
+- addPostRegAlloc() - For peephole optimization after allocation
+- addPreEmitPass()  - For final machine code transformations
+*/
+
+extern "C" {
+  // C-style export for dynamic loading
+  MachineFunctionPass* createMyMachinePassExtern() {
+    return createMyMachinePass();
+  }
+}
