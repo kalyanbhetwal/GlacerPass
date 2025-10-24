@@ -135,6 +135,11 @@ class RAMinimal final : public MachineFunctionPass, private LiveRangeEdit::Deleg
                         }
                 }
 
+                //FORCE SPILLING: Uncomment to limit registers and trigger spilling
+                // if (Hints.size() > 3) {
+                //         Hints.resize(3);
+                // }
+
                 outs () << "Hint Registers: [";
 
                 for (const MCPhysReg &PhysReg : Hints) {
@@ -174,8 +179,15 @@ class RAMinimal final : public MachineFunctionPass, private LiveRangeEdit::Deleg
                         return PhysReg;
                 }
                 /// 3.4. Spill the current virtual register.
+                // Check if this interval can be spilled (prevents spilling already-spilled intervals)
+                if (!LI->isSpillable()) {
+                        outs () << "*** ERROR: Cannot spill " << BOLD (*LI) << " - interval is not spillable! ***\n";
+                        report_fatal_error("Unable to allocate register - interval cannot be spilled");
+                }
+                outs () << "*** SPILLING virtual register " << BOLD (*LI) << " to stack ***\n";
                 LiveRangeEdit LRE (LI, *SplitVirtRegs, *MF, *LIS, VRM, this, &DeadRemats);
                 SpillerInstance->spill (LRE);
+                outs () << "*** Spill complete, created " << SplitVirtRegs->size() << " new virtual registers ***\n";
                 return 0;
         }
 
