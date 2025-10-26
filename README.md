@@ -1,4 +1,4 @@
-# GlacerPass (MSP430 Custom Register Allocator)
+# GlacierPass (MSP430 Custom Register Allocator)
 
 A custom LLVM register allocator for MSP430 that partitions registers based on function attributes.
 
