@@ -9,11 +9,6 @@ This project implements a custom register allocator that reserves specific regis
 - **Functions WITH `discard` attribute**: Use only **R12-R15**
 - **Functions WITHOUT `discard` attribute**: Use **R4-R11** (avoiding R12-R15)
 
-This enables register isolation between different classes of functions, useful for:
-- Security isolation
-- Real-time scheduling constraints
-- Mixed criticality systems
-- Custom calling conventions
 
 ## Quick Start
 
