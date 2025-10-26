@@ -142,30 +142,30 @@ class RAMinimal final : public MachineFunctionPass, private LiveRangeEdit::Deleg
                 }
                 outs() << "]\n";
 
-                // For functions with "discard" attribute, only use R10-R13
-                // For functions without "discard" attribute, use all registers EXCEPT R10-R13
+                // For functions with "discard" attribute, only use R12-R15
+                // For functions without "discard" attribute, use all registers EXCEPT R12-R15
                 if (MF->getFunction().hasFnAttribute("discard")) {
                         SmallVector<MCPhysReg, 16> FilteredRegs;
                         for (const MCPhysReg &PhysReg : Hints) {
                                 StringRef RegName = TRI->getRegAsmName(PhysReg);
-                                if (RegName == "R10" || RegName == "R11" || RegName == "R12" || RegName == "R13") {
+                                if (RegName == "R12" || RegName == "R13" || RegName == "R14" || RegName == "R15") {
                                         FilteredRegs.push_back(PhysReg);
                                 }
                         }
                         Hints.clear();
                         Hints.append(FilteredRegs.begin(), FilteredRegs.end());
-                        outs() << "*** DISCARD MODE: Limited to R10-R13 ***\n";
+                        outs() << "*** DISCARD MODE: Limited to R12-R15 ***\n";
                 } else {
                         SmallVector<MCPhysReg, 16> FilteredRegs;
                         for (const MCPhysReg &PhysReg : Hints) {
                                 StringRef RegName = TRI->getRegAsmName(PhysReg);
-                                if (RegName != "R10" && RegName != "R11" && RegName != "R12" && RegName != "R13") {
+                                if (RegName != "R12" && RegName != "R13" && RegName != "R14" && RegName != "R15") {
                                         FilteredRegs.push_back(PhysReg);
                                 }
                         }
                         Hints.clear();
                         Hints.append(FilteredRegs.begin(), FilteredRegs.end());
-                        outs() << "*** NORMAL MODE: Using all registers except R10-R13 ***\n";
+                        outs() << "*** NORMAL MODE: Using all registers except R12-R15 ***\n";
                 }
 
                 outs () << "Hint Registers: [";
