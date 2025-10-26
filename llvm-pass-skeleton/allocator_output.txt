@@ -1,0 +1,454 @@
+************************************************
+* Machine Function: discard_func
+* Has discard attribute: YES
+************************************************
+0B	bb.0.entry:
+	  liveins: $r12, $r13
+16B	  %1:gr16 = COPY $r13
+32B	  %0:gr16 = COPY $r12
+48B	  MOV16mr %stack.0.a.addr, 0, %0:gr16 :: (store (s16) into %ir.a.addr)
+64B	  MOV16mr %stack.1.b.addr, 0, %1:gr16 :: (store (s16) into %ir.b.addr)
+80B	  %4:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+96B	  %3:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+128B	  %4:gr16 = nsw ADD16rr %4:gr16(tied-def 0), %3:gr16, implicit-def dead $sr
+144B	  MOV16mr %stack.2.x, 0, %4:gr16 :: (store (s16) into %ir.x)
+160B	  %6:gr16 = MOV16rm %stack.2.x, 0 :: (dereferenceable load (s16) from %ir.x)
+192B	  %6:gr16 = ADD16rr %6:gr16(tied-def 0), %6:gr16, implicit-def dead $sr
+208B	  MOV16mr %stack.3.y, 0, %6:gr16 :: (store (s16) into %ir.y)
+224B	  %9:gr16 = MOV16rm %stack.3.y, 0 :: (dereferenceable load (s16) from %ir.y)
+240B	  %8:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+272B	  %9:gr16 = nsw SUB16rr %9:gr16(tied-def 0), %8:gr16, implicit-def dead $sr
+288B	  MOV16mr %stack.4.z, 0, %9:gr16 :: (store (s16) into %ir.z)
+304B	  %12:gr16 = MOV16rm %stack.4.z, 0 :: (dereferenceable load (s16) from %ir.z)
+320B	  %11:gr16 = MOV16rm %stack.2.x, 0 :: (dereferenceable load (s16) from %ir.x)
+352B	  %12:gr16 = nsw ADD16rr %12:gr16(tied-def 0), %11:gr16, implicit-def dead $sr
+368B	  MOV16mr %stack.5.w, 0, %12:gr16 :: (store (s16) into %ir.w)
+384B	  %15:gr16 = MOV16rm %stack.5.w, 0 :: (dereferenceable load (s16) from %ir.w)
+400B	  %14:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+432B	  %15:gr16 = nsw ADD16rr %15:gr16(tied-def 0), %14:gr16, implicit-def dead $sr
+448B	  $r12 = COPY %15:gr16
+464B	  RET implicit $r12
+
+************************************************
+
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%0 [32r,48r:0) 0@32r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%1 [16r,64r:0) 0@16r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%3 [96r,128r:0) 0@96r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%4 [80r,128r:0)[128r,144r:1) 0@80r 1@128r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%6 [160r,192r:0)[192r,208r:1) 0@160r 1@192r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%8 [240r,272r:0) 0@240r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%9 [224r,272r:0)[272r,288r:1) 0@224r 1@272r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%11 [320r,352r:0) 0@320r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%12 [304r,352r:0)[352r,368r:1) 0@304r 1@352r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%14 [400r,432r:0) 0@400r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%15 [384r,432r:0)[432r,448r:1) 0@384r 1@432r  weight:8.706897e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%0 [32r,48r:0) 0@32r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%1 [16r,64r:0) 0@16r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R13, R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%3 [96r,128r:0) 0@96r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%4 [80r,128r:0)[128r,144r:1) 0@80r 1@128r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%6 [160r,192r:0)[192r,208r:1) 0@160r 1@192r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%8 [240r,272r:0) 0@240r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%9 [224r,272r:0)[272r,288r:1) 0@224r 1@272r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%11 [320r,352r:0) 0@320r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%12 [304r,352r:0)[352r,368r:1) 0@304r 1@352r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%14 [400r,432r:0) 0@400r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%15 [384r,432r:0)[432r,448r:1) 0@384r 1@432r  weight:8.706897e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+************************************************
+* Machine Function: normal_func
+* Has discard attribute: NO
+************************************************
+0B	bb.0.entry:
+	  liveins: $r12, $r13
+16B	  %1:gr16 = COPY $r13
+32B	  %0:gr16 = COPY $r12
+48B	  MOV16mr %stack.0.a.addr, 0, %0:gr16 :: (store (s16) into %ir.a.addr)
+64B	  MOV16mr %stack.1.b.addr, 0, %1:gr16 :: (store (s16) into %ir.b.addr)
+80B	  %4:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+96B	  %3:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+128B	  %4:gr16 = nsw ADD16rr %4:gr16(tied-def 0), %3:gr16, implicit-def dead $sr
+144B	  MOV16mr %stack.2.x, 0, %4:gr16 :: (store (s16) into %ir.x)
+160B	  %6:gr16 = MOV16rm %stack.2.x, 0 :: (dereferenceable load (s16) from %ir.x)
+192B	  %6:gr16 = ADD16rr %6:gr16(tied-def 0), %6:gr16, implicit-def dead $sr
+208B	  MOV16mr %stack.3.y, 0, %6:gr16 :: (store (s16) into %ir.y)
+224B	  %9:gr16 = MOV16rm %stack.3.y, 0 :: (dereferenceable load (s16) from %ir.y)
+240B	  %8:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+272B	  %9:gr16 = nsw SUB16rr %9:gr16(tied-def 0), %8:gr16, implicit-def dead $sr
+288B	  MOV16mr %stack.4.z, 0, %9:gr16 :: (store (s16) into %ir.z)
+304B	  %12:gr16 = MOV16rm %stack.4.z, 0 :: (dereferenceable load (s16) from %ir.z)
+320B	  %11:gr16 = MOV16rm %stack.2.x, 0 :: (dereferenceable load (s16) from %ir.x)
+352B	  %12:gr16 = nsw ADD16rr %12:gr16(tied-def 0), %11:gr16, implicit-def dead $sr
+368B	  MOV16mr %stack.5.w, 0, %12:gr16 :: (store (s16) into %ir.w)
+384B	  %15:gr16 = MOV16rm %stack.5.w, 0 :: (dereferenceable load (s16) from %ir.w)
+400B	  %14:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+432B	  %15:gr16 = nsw ADD16rr %15:gr16(tied-def 0), %14:gr16, implicit-def dead $sr
+448B	  $r12 = COPY %15:gr16
+464B	  RET implicit $r12
+
+************************************************
+
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%0 [32r,48r:0) 0@32r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%1 [16r,64r:0) 0@16r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%3 [96r,128r:0) 0@96r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%4 [80r,128r:0)[128r,144r:1) 0@80r 1@128r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%6 [160r,192r:0)[192r,208r:1) 0@160r 1@192r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%8 [240r,272r:0) 0@240r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%9 [224r,272r:0)[272r,288r:1) 0@224r 1@272r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%11 [320r,352r:0) 0@320r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%12 [304r,352r:0)[352r,368r:1) 0@304r 1@352r  weight:8.620690e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%14 [400r,432r:0) 0@400r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%15 [384r,432r:0)[432r,448r:1) 0@384r 1@432r  weight:8.706897e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%0 [32r,48r:0) 0@32r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%1 [16r,64r:0) 0@16r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%3 [96r,128r:0) 0@96r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%4 [80r,128r:0)[128r,144r:1) 0@80r 1@128r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%6 [160r,192r:0)[192r,208r:1) 0@160r 1@192r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%8 [240r,272r:0) 0@240r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%9 [224r,272r:0)[272r,288r:1) 0@224r 1@272r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%11 [320r,352r:0) 0@320r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%12 [304r,352r:0)[352r,368r:1) 0@304r 1@352r  weight:8.620690e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%14 [400r,432r:0) 0@400r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%15 [384r,432r:0)[432r,448r:1) 0@384r 1@432r  weight:8.706897e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+************************************************
+* Machine Function: discard_func2
+* Has discard attribute: YES
+************************************************
+0B	bb.0.entry:
+	  successors: %bb.1(0x80000000); %bb.1(100.00%)
+	  liveins: $r12, $r13, $r14
+16B	  %2:gr16 = COPY $r14
+32B	  %1:gr16 = COPY $r13
+48B	  %0:gr16 = COPY $r12
+64B	  MOV16mr %stack.0.a.addr, 0, %0:gr16 :: (store (s16) into %ir.a.addr)
+80B	  MOV16mr %stack.1.b.addr, 0, %1:gr16 :: (store (s16) into %ir.b.addr)
+96B	  MOV16mr %stack.2.c.addr, 0, %2:gr16 :: (store (s16) into %ir.c.addr)
+112B	  MOV16mc %stack.3.result, 0, 0 :: (store (s16) into %ir.result)
+128B	  MOV16mc %stack.4.i, 0, 0 :: (store (s16) into %ir.i)
+144B	  JMP %bb.1
+
+160B	bb.1.for.cond:
+	; predecessors: %bb.0, %bb.3
+	  successors: %bb.2, %bb.4
+
+176B	  %3:gr16 = MOV16rm %stack.4.i, 0 :: (dereferenceable load (s16) from %ir.i)
+192B	  %4:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+208B	  CMP16rr %3:gr16, %4:gr16, implicit-def $sr
+224B	  JCC %bb.4, 4, implicit $sr
+240B	  JMP %bb.2
+
+256B	bb.2.for.body:
+	; predecessors: %bb.1
+	  successors: %bb.3(0x80000000); %bb.3(100.00%)
+
+272B	  %6:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+288B	  %7:gr16 = MOV16rm %stack.2.c.addr, 0 :: (dereferenceable load (s16) from %ir.c.addr)
+304B	  ADJCALLSTACKDOWN 0, 0, implicit-def dead $sp, implicit-def dead $sr, implicit $sp
+320B	  $r12 = COPY %6:gr16
+336B	  $r13 = COPY %7:gr16
+352B	  CALLi &__mspabi_mpyi, implicit-def dead $r11, implicit-def $r12, implicit-def dead $r13, implicit-def dead $r14, implicit-def dead $r15, implicit-def dead $sr, implicit $sp, implicit $r12, implicit $r13
+368B	  ADJCALLSTACKUP 0, 0, implicit-def dead $sp, implicit-def dead $sr, implicit $sp
+384B	  %8:gr16 = COPY $r12
+400B	  %10:gr16 = MOV16rm %stack.3.result, 0 :: (dereferenceable load (s16) from %ir.result)
+432B	  %10:gr16 = nsw ADD16rr %10:gr16(tied-def 0), %8:gr16, implicit-def dead $sr
+448B	  MOV16mr %stack.3.result, 0, %10:gr16 :: (store (s16) into %ir.result)
+464B	  JMP %bb.3
+
+480B	bb.3.for.inc:
+	; predecessors: %bb.2
+	  successors: %bb.1(0x80000000); %bb.1(100.00%)
+
+496B	  %12:gr16 = MOV16rm %stack.4.i, 0 :: (dereferenceable load (s16) from %ir.i)
+528B	  %12:gr16 = nsw ADD16rc %12:gr16(tied-def 0), 1, implicit-def dead $sr
+544B	  MOV16mr %stack.4.i, 0, %12:gr16 :: (store (s16) into %ir.i)
+560B	  JMP %bb.1
+
+576B	bb.4.for.end:
+	; predecessors: %bb.1
+
+592B	  %5:gr16 = MOV16rm %stack.3.result, 0 :: (dereferenceable load (s16) from %ir.result)
+608B	  $r12 = COPY %5:gr16
+624B	  RET implicit $r12
+
+************************************************
+
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%0 [48r,64r:0) 0@48r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%1 [32r,80r:0) 0@32r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%2 [16r,96r:0) 0@16r  weight:4.208333e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%3 [176r,208r:0) 0@176r  weight:9.259259e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%4 [192r,208r:0) 0@192r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%5 [592r,608r:0) 0@592r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%6 [272r,320r:0) 0@272r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%7 [288r,336r:0) 0@288r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%8 [384r,432r:0) 0@384r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%10 [400r,432r:0)[432r,448r:1) 0@400r 1@432r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%12 [496r,528r:0)[528r,544r:1) 0@496r 1@528r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%0 [48r,64r:0) 0@48r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%1 [32r,80r:0) 0@32r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R13, R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%2 [16r,96r:0) 0@16r  weight:4.208333e-03[0m}
+Available registers before filtering: [R14 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR11[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%3 [176r,208r:0) 0@176r  weight:9.259259e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%4 [192r,208r:0) 0@192r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%5 [592r,608r:0) 0@592r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%6 [272r,320r:0) 0@272r  weight:4.508928e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%7 [288r,336r:0) 0@288r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R13, R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%8 [384r,432r:0) 0@384r  weight:4.508928e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%10 [400r,432r:0)[432r,448r:1) 0@400r 1@432r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR13[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%12 [496r,528r:0)[528r,544r:1) 0@496r 1@528r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** DISCARD MODE: Limited to R10-R13 ***
+Hint Registers: [R12, R13, R11, R10, ]
+Allocating physical register [1mR12[0m
+************************************************
+* Machine Function: normal_func2
+* Has discard attribute: NO
+************************************************
+0B	bb.0.entry:
+	  successors: %bb.1(0x80000000); %bb.1(100.00%)
+	  liveins: $r12, $r13, $r14
+16B	  %2:gr16 = COPY $r14
+32B	  %1:gr16 = COPY $r13
+48B	  %0:gr16 = COPY $r12
+64B	  MOV16mr %stack.0.a.addr, 0, %0:gr16 :: (store (s16) into %ir.a.addr)
+80B	  MOV16mr %stack.1.b.addr, 0, %1:gr16 :: (store (s16) into %ir.b.addr)
+96B	  MOV16mr %stack.2.c.addr, 0, %2:gr16 :: (store (s16) into %ir.c.addr)
+112B	  MOV16mc %stack.3.result, 0, 0 :: (store (s16) into %ir.result)
+128B	  MOV16mc %stack.4.i, 0, 0 :: (store (s16) into %ir.i)
+144B	  JMP %bb.1
+
+160B	bb.1.for.cond:
+	; predecessors: %bb.0, %bb.3
+	  successors: %bb.2, %bb.4
+
+176B	  %3:gr16 = MOV16rm %stack.4.i, 0 :: (dereferenceable load (s16) from %ir.i)
+192B	  %4:gr16 = MOV16rm %stack.0.a.addr, 0 :: (dereferenceable load (s16) from %ir.a.addr)
+208B	  CMP16rr %3:gr16, %4:gr16, implicit-def $sr
+224B	  JCC %bb.4, 4, implicit $sr
+240B	  JMP %bb.2
+
+256B	bb.2.for.body:
+	; predecessors: %bb.1
+	  successors: %bb.3(0x80000000); %bb.3(100.00%)
+
+272B	  %6:gr16 = MOV16rm %stack.1.b.addr, 0 :: (dereferenceable load (s16) from %ir.b.addr)
+288B	  %7:gr16 = MOV16rm %stack.2.c.addr, 0 :: (dereferenceable load (s16) from %ir.c.addr)
+304B	  ADJCALLSTACKDOWN 0, 0, implicit-def dead $sp, implicit-def dead $sr, implicit $sp
+320B	  $r12 = COPY %6:gr16
+336B	  $r13 = COPY %7:gr16
+352B	  CALLi &__mspabi_mpyi, implicit-def dead $r11, implicit-def $r12, implicit-def dead $r13, implicit-def dead $r14, implicit-def dead $r15, implicit-def dead $sr, implicit $sp, implicit $r12, implicit $r13
+368B	  ADJCALLSTACKUP 0, 0, implicit-def dead $sp, implicit-def dead $sr, implicit $sp
+384B	  %8:gr16 = COPY $r12
+400B	  %10:gr16 = MOV16rm %stack.3.result, 0 :: (dereferenceable load (s16) from %ir.result)
+432B	  %10:gr16 = nsw ADD16rr %10:gr16(tied-def 0), %8:gr16, implicit-def dead $sr
+448B	  MOV16mr %stack.3.result, 0, %10:gr16 :: (store (s16) into %ir.result)
+464B	  JMP %bb.3
+
+480B	bb.3.for.inc:
+	; predecessors: %bb.2
+	  successors: %bb.1(0x80000000); %bb.1(100.00%)
+
+496B	  %12:gr16 = MOV16rm %stack.4.i, 0 :: (dereferenceable load (s16) from %ir.i)
+528B	  %12:gr16 = nsw ADD16rc %12:gr16(tied-def 0), 1, implicit-def dead $sr
+544B	  MOV16mr %stack.4.i, 0, %12:gr16 :: (store (s16) into %ir.i)
+560B	  JMP %bb.1
+
+576B	bb.4.for.end:
+	; predecessors: %bb.1
+
+592B	  %5:gr16 = MOV16rm %stack.3.result, 0 :: (dereferenceable load (s16) from %ir.result)
+608B	  $r12 = COPY %5:gr16
+624B	  RET implicit $r12
+
+************************************************
+
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%0 [48r,64r:0) 0@48r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%1 [32r,80r:0) 0@32r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%2 [16r,96r:0) 0@16r  weight:4.208333e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%3 [176r,208r:0) 0@176r  weight:9.259259e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%4 [192r,208r:0) 0@192r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%5 [592r,608r:0) 0@592r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%6 [272r,320r:0) 0@272r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%7 [288r,336r:0) 0@288r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%8 [384r,432r:0) 0@384r  weight:4.508928e-03[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%10 [400r,432r:0)[432r,448r:1) 0@400r 1@432r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:60, I] Pushing {Reg=[1m%12 [496r,528r:0)[528r,544r:1) 0@496r 1@528r  weight:INF[0m}
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%0 [48r,64r:0) 0@48r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%1 [32r,80r:0) 0@32r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%2 [16r,96r:0) 0@16r  weight:4.208333e-03[0m}
+Available registers before filtering: [R14 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR9[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%3 [176r,208r:0) 0@176r  weight:9.259259e-03[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%4 [192r,208r:0) 0@192r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%5 [592r,608r:0) 0@592r  weight:INF[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%6 [272r,320r:0) 0@272r  weight:4.508928e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%7 [288r,336r:0) 0@288r  weight:4.508928e-03[0m}
+Available registers before filtering: [R13 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%8 [384r,432r:0) 0@384r  weight:4.508928e-03[0m}
+Available registers before filtering: [R12 R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%10 [400r,432r:0)[432r,448r:1) 0@400r 1@432r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR15[0m
+[/Users/kb/Documents/myllvmfor-msp430/GlacierPass/llvm-pass-skeleton/skeleton/Skeleton.cpp:69, I] Popping {Reg=[1m%12 [496r,528r:0)[528r,544r:1) 0@496r 1@528r  weight:INF[0m}
+Available registers before filtering: [R12 R13 R14 R15 R11 R10 R9 R8 R7 R6 R5 R4 ]
+*** NORMAL MODE: Using all registers except R10-R13 ***
+Hint Registers: [R14, R15, R9, R8, R7, R6, R5, R4, ]
+Allocating physical register [1mR14[0m

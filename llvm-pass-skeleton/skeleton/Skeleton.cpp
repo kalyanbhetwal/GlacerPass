@@ -135,10 +135,38 @@ class RAMinimal final : public MachineFunctionPass, private LiveRangeEdit::Deleg
                         }
                 }
 
-                //FORCE SPILLING: Uncomment to limit registers and trigger spilling
-                // if (Hints.size() > 3) {
-                //         Hints.resize(3);
-                // }
+                // Debug: show all available registers before filtering
+                outs() << "Available registers before filtering: [";
+                for (const MCPhysReg &PhysReg : Hints) {
+                        outs() << TRI->getRegAsmName(PhysReg) << " ";
+                }
+                outs() << "]\n";
+
+                // For functions with "discard" attribute, only use R10-R13
+                // For functions without "discard" attribute, use all registers EXCEPT R10-R13
+                if (MF->getFunction().hasFnAttribute("discard")) {
+                        SmallVector<MCPhysReg, 16> FilteredRegs;
+                        for (const MCPhysReg &PhysReg : Hints) {
+                                StringRef RegName = TRI->getRegAsmName(PhysReg);
+                                if (RegName == "R10" || RegName == "R11" || RegName == "R12" || RegName == "R13") {
+                                        FilteredRegs.push_back(PhysReg);
+                                }
+                        }
+                        Hints.clear();
+                        Hints.append(FilteredRegs.begin(), FilteredRegs.end());
+                        outs() << "*** DISCARD MODE: Limited to R10-R13 ***\n";
+                } else {
+                        SmallVector<MCPhysReg, 16> FilteredRegs;
+                        for (const MCPhysReg &PhysReg : Hints) {
+                                StringRef RegName = TRI->getRegAsmName(PhysReg);
+                                if (RegName != "R10" && RegName != "R11" && RegName != "R12" && RegName != "R13") {
+                                        FilteredRegs.push_back(PhysReg);
+                                }
+                        }
+                        Hints.clear();
+                        Hints.append(FilteredRegs.begin(), FilteredRegs.end());
+                        outs() << "*** NORMAL MODE: Using all registers except R10-R13 ***\n";
+                }
 
                 outs () << "Hint Registers: [";
 
@@ -240,8 +268,12 @@ class RAMinimal final : public MachineFunctionPass, private LiveRangeEdit::Deleg
         {
                 this->MF = &MF;
 
+                // Check if function has "discard" attribute
+                bool hasDiscardAttr = MF.getFunction().hasFnAttribute("discard");
+
                 outs () << "************************************************\n"
-                        << "* Machine Function\n"
+                        << "* Machine Function: " << MF.getName() << "\n"
+                        << "* Has discard attribute: " << (hasDiscardAttr ? "YES" : "NO") << "\n"
                         << "************************************************\n";
                 // The *SlotIndexes* maps each machine instruction to a unique ID.
                 SI = &getAnalysis<SlotIndexesWrapperPass> ().getSI ();
