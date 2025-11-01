@@ -254,14 +254,6 @@ Both function types respect the MSP430 calling convention:
 - Callee-saved: R4-R10
 - Caller-saved: R11-R15
 
-## Contributing
-
-This is a research/educational project demonstrating custom LLVM register allocation for embedded systems.
-
-## License
-
-Check the original llvm-pass-skeleton license.
-
 ## References
 
 - LLVM Register Allocator Documentation
